@@ -15,8 +15,6 @@ var _consolid = require("consolid");
 
 var _core = require("@material-ui/core");
 
-var _recoil = require("recoil");
-
 var _solidClientAuthnBrowser = require("@inrupt/solid-client-authn-browser");
 
 var _uuid = require("uuid");
@@ -34,9 +32,10 @@ var _default = _ref => {
     trigger,
     projects,
     setProjects,
-    store
+    store,
+    setTrigger
   } = _ref;
-  const [aggregator, setAggregator] = (0, _react.useState)("http://localhost:5000/jeroen/lbd/");
+  const [aggregator, setAggregator] = (0, _react.useState)("https://pod.lbdserver.org/jeroen/lbd/");
   const [data, setData] = (0, _react.useState)([]);
   const [myProjects, setMyProjects] = (0, _react.useState)([]); // trigger rerender on trigger (i.e. if session changes)
 
@@ -88,7 +87,8 @@ var _default = _ref => {
       project: item,
       projects: projects,
       store: store,
-      setProjects: setProjects
+      setProjects: setProjects,
+      setTrigger: setTrigger
     });
   })));
 };

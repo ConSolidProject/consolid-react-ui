@@ -12,19 +12,25 @@ import {
 } from "@material-ui/core";
 import { getDefaultSession } from "@inrupt/solid-client-authn-browser";
 
-export default ({ project, projects, setProjects, store }) => {
- 
+export default ({ project, projects, setProjects, store, setTrigger }) => {
     async function activateProject() {
+
       if (projects.includes(project)) {
+
         setProjects((proj) =>
           proj.filter((p) => {
-            return p != proj;
+            return p != project;
           })
         );
+        setTrigger((t) => t + 1)
+
       } else {
+
         setProjects((proj) => [...proj, project]);
         await loadProjectMetadata(project, store, getDefaultSession());
         console.log("done");
+        setTrigger((t) => t + 1)
+
       }
     }
   

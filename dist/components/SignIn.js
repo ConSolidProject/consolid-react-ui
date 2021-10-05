@@ -25,10 +25,6 @@ var _core = require("@material-ui/core");
 
 var _solidClientAuthnBrowser = require("@inrupt/solid-client-authn-browser");
 
-var _atoms = require("../atoms");
-
-var _recoil = require("recoil");
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -61,12 +57,11 @@ var _default = _ref => {
     trigger,
     setTrigger
   } = _ref;
-  const [oidcIssuer, setOidcIssuer] = (0, _react.useState)("http://localhost:5000");
+  const [oidcIssuer, setOidcIssuer] = (0, _react.useState)("https://pod.lbdserver.org");
   const [loading, setLoading] = (0, _react.useState)(false); // this function only runs when the component mounts. If the mount is the result of a redirect from a Solid Identity Provider, the Session is verified and extracted, and the user is authenticated.
 
   (0, _react.useEffect)(() => {
     getAuthentication().then(s => setTrigger(t => t + 1));
-    console.log("getDefaultSession()", (0, _solidClientAuthnBrowser.getDefaultSession)());
   }, []); // This function is called when the login button is clicked. If the user logs in as a guest, an unauthenticated solid session is created.
 
   const onLoginClick = async e => {
@@ -116,7 +111,7 @@ var _default = _ref => {
   }, "The LBDserver demo projects can be read and queried publicly. However, in most cases projects will not be open to the public - authentication is required. You can get a federated Web identity at the Solid Identity Provider of your choice. You can also ", /*#__PURE__*/_react.default.createElement("a", {
     target: "_blank",
     href: "https://github.com/solid/community-server"
-  }, "set up such Identity Provider yourself"), ". Having a Web Identity and a personalised online data vault (\"Pod\"), you can start creating your own federated LBDserver projects. How cool is that?!"), /*#__PURE__*/_react.default.createElement("br", null), (0, _solidClientAuthnBrowser.getDefaultSession)().info.isLoggedIn ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_core.Typography, {
+  }, "set up such Identity Provider yourself"), ". Having a Web Identity and a personalised online data vault (\"Pod\"), you can start creating your own federated LBDserver projects."), /*#__PURE__*/_react.default.createElement("br", null), (0, _solidClientAuthnBrowser.getDefaultSession)().info.isLoggedIn ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_core.Typography, {
     variant: "body1"
   }, "Your are logged in as:"), /*#__PURE__*/_react.default.createElement("a", {
     href: (0, _solidClientAuthnBrowser.getDefaultSession)().info.webId

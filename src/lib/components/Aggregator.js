@@ -16,14 +16,13 @@ import {
   FormControlLabel,
   Container,
 } from "@material-ui/core";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { getDefaultSession } from "@inrupt/solid-client-authn-browser";
 import { v4 } from "uuid";
 import ProjectCard from './ProjectCard'
 
-export default ({trigger, projects, setProjects, store}) => {
+export default ({trigger, projects, setProjects, store, setTrigger}) => {
   const [aggregator, setAggregator] = useState(
-    "http://localhost:5000/jeroen/lbd/"
+    "https://pod.lbdserver.org/jeroen/lbd/"
   );
   const [data, setData] = useState([]);
   const [myProjects, setMyProjects] = useState([]);
@@ -81,7 +80,7 @@ export default ({trigger, projects, setProjects, store}) => {
           GET PROJECTS
         </Button>
         {data.map((item) => {
-          return <ProjectCard key={item} project={item} projects={projects} store={store} setProjects={setProjects} />;
+          return <ProjectCard key={item} project={item} projects={projects} store={store} setProjects={setProjects} setTrigger={setTrigger}/>;
         })}
       </Container>
     </React.Fragment>

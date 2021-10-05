@@ -14,8 +14,6 @@ import {
   getDefaultSession,
   login,
 } from "@inrupt/solid-client-authn-browser";
-import { trigger as t } from "../atoms";
-import { useRecoilState, useRecoilValue } from "recoil";
 
 async function getAuthentication() {
   try {
@@ -37,12 +35,11 @@ async function getAuthentication() {
 }
 
 export default ({trigger, setTrigger}) => {
-  const [oidcIssuer, setOidcIssuer] = useState("http://localhost:5000");
+  const [oidcIssuer, setOidcIssuer] = useState("https://pod.lbdserver.org");
   const [loading, setLoading] = useState(false);
   // this function only runs when the component mounts. If the mount is the result of a redirect from a Solid Identity Provider, the Session is verified and extracted, and the user is authenticated.
   useEffect(() => {
     getAuthentication().then((s) => setTrigger((t) => t + 1));
-    console.log(`getDefaultSession()`, getDefaultSession());
   }, []);
 
   // This function is called when the login button is clicked. If the user logs in as a guest, an unauthenticated solid session is created.
@@ -84,7 +81,7 @@ export default ({trigger, setTrigger}) => {
   return (
     <React.Fragment>
         <Container component="main">
-        <Typography style={{textAlign: "justify"}} variant="body1">The LBDserver demo projects can be read and queried publicly. However, in most cases projects will not be open to the public - authentication is required. You can get a federated Web identity at the Solid Identity Provider of your choice. You can also <a target="_blank" href="https://github.com/solid/community-server">set up such Identity Provider yourself</a>. Having a Web Identity and a personalised online data vault ("Pod"), you can start creating your own federated LBDserver projects. How cool is that?!</Typography>
+        <Typography style={{textAlign: "justify"}} variant="body1">The LBDserver demo projects can be read and queried publicly. However, in most cases projects will not be open to the public - authentication is required. You can get a federated Web identity at the Solid Identity Provider of your choice. You can also <a target="_blank" href="https://github.com/solid/community-server">set up such Identity Provider yourself</a>. Having a Web Identity and a personalised online data vault ("Pod"), you can start creating your own federated LBDserver projects.</Typography>
         <br/>
           {getDefaultSession().info.isLoggedIn ? (
             <div>

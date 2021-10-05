@@ -28,18 +28,21 @@ var _default = _ref => {
     project,
     projects,
     setProjects,
-    store
+    store,
+    setTrigger
   } = _ref;
 
   async function activateProject() {
     if (projects.includes(project)) {
       setProjects(proj => proj.filter(p => {
-        return p != proj;
+        return p != project;
       }));
+      setTrigger(t => t + 1);
     } else {
       setProjects(proj => [...proj, project]);
       await (0, _consolid.loadProjectMetadata)(project, store, (0, _solidClientAuthnBrowser.getDefaultSession)());
       console.log("done");
+      setTrigger(t => t + 1);
     }
   }
 
